@@ -7,15 +7,26 @@ while read -r current_line; do
     [ -z "$current_line" ] && continue
 
     # check if task done- if it is, $is_done will be '-'
-    is_done=$(echo "${current_line%% *}" | grep -e"x" - | tr 'x' '-' )
+    is_done=$(echo "${current_line%% *}")
+    [ "$is_done" = "x" ] && is_done="-"
+    [ "$is_done" = "x" ] || is_done=""
+
     # truncate off x
     current_line=${current_line#x }
 
     # check if has priority
     # TODO: handle cases of priority lower than I
     # what happens? UNDOCUMENTED BEHAVIOUR!!!
-    has_priority=$(echo "${current_line%% *}" | tr 'ABCDEFGHI' '123456789' | grep "(.)")
-    has_priority=$(echo "$has_priority" | sed "s/[()]//g")
+    has_priority=$(echo "${current_line%% *}")
+    case $has_priority in
+        \(*\)) has_priority=${has_priority%)}
+            has_priority=${has_priority#(}
+            has_priority=$(echo "$has_priority" | tr 'ABCDEFGHI' '123456789')
+            ;;
+        *) has_priority=""
+    esac
+
+
     [ -z "$has_priority" ] && has_priority="0"
     current_line=${current_line#(*) }
 
