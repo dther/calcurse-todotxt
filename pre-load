@@ -1,0 +1,3 @@
+#!/bin/sh
+
+todotxt-to-calcurse.sh > ~/.local/share/calcurse/todo

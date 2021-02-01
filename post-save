@@ -1,0 +1,4 @@
+#!/bin/sh
+
+calcurse-to-todotxt.sh > ~/docs/todo/todo.txt
+todo.sh archive
