@@ -45,4 +45,6 @@ See the pre-load and post-save shell scripts for an example of how this works!
  * todo.txt tasks can only be on one line. Multi-line notes are not preserved during conversion,
    *and will be lost permanently.*
  * Priorities lower than "I" get *lost*. Haven't figured out how to deal with them.
+ * Completion dates are lost (set to current date every time calcurse-to-todotxt.sh is run)
+   It's recommended  you use something like todo.sh's archive function.
  * Probably a lot more. Please don't use this on particularly valuable todo lists.
